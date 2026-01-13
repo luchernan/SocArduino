@@ -53,19 +53,19 @@ Este proyecto está pensado como **laboratorio educativo**, demostración técni
 
 ## 🖥️ Eventos detectados
 
-### 🔴 Login fallido
-
-* **Event ID:** 4625
-* **Log:** Security
-* **Severidad:** HIGH
-* **Uso:** Detección de fuerza bruta o accesos no autorizados
-
 ### 🔵 Login correcto
 
 * **Event ID:** 4624
 * **Log:** Security
 * **Severidad:** INFO
-* **Uso:** Evento informativo / actividad legítima
+* **Uso:** Actividad legítima detectada
+
+### 🔴 Login fallido
+
+* **Event ID:** 4625
+* **Log:** Security
+* **Severidad:** HIGH
+* **Uso:** Detección de accesos no autorizados
 
 ### 🔴 SSH login fallido
 
@@ -74,15 +74,37 @@ Este proyecto está pensado como **laboratorio educativo**, demostración técni
 * **Severidad:** HIGH
 * **Uso:** Detección de accesos remotos fallidos
 
+### 🟢 Servicio del sistema iniciado
+
+* **Event ID:** 7036
+* **Log:** System
+* **Severidad:** LOW
+* **Uso:** Evento informativo de sistema
+
+### 🚨 Fuerza bruta detectada (correlación)
+
+* **Origen:** Múltiples eventos 4625
+* **Ventana temporal:** ≥ 5 intentos en 30 segundos
+* **Severidad:** CRITICAL
+* **Uso:** Detección de ataque activo
+
 ---
 
 ## 🚨 Sistema de severidades
 
-| Severidad | Color LED            | Zumbador    | Descripción                        |
-| --------- | -------------------- | ----------- | ---------------------------------- |
-| INFO      | 🔵 Azul              | ❌ No        | Evento informativo                 |
-| HIGH      | 🔴 Rojo              | ✅ Sí        | Evento sospechoso                  |
-| CRITICAL  | 🔴 Rojo intermitente | 🔔 Continuo | Amenaza grave (correlación futura) |
+| Severidad | Color LED            | Zumbador    | Descripción                    |
+| --------- | -------------------- | ----------- | ------------------------------ |
+| INFO      | 🔵 Azul              | ❌ No        | Actividad normal               |
+| LOW       | 🟢 Verde             | ❌ No        | Evento informativo del sistema |
+| HIGH      | 🔴 Rojo              | ✅ Corto     | Evento sospechoso              |
+| CRITICAL  | 🔴 Rojo intermitente | 🔔 Continuo | Amenaza activa detectada       |
+
+---
+
+-----|-----------|----------|------------|
+| INFO | 🔵 Azul | ❌ No | Evento informativo |
+| HIGH | 🔴 Rojo | ✅ Sí | Evento sospechoso |
+| CRITICAL | 🔴 Rojo intermitente | 🔔 Continuo | Amenaza grave (correlación futura) |
 
 ---
 
@@ -114,15 +136,17 @@ Esto simula un **panel de alertas SOC real**.
 
 Funciones principales:
 
-* Lectura de logs de Windows
-* Filtrado por Event ID
-* Control de duplicados
-* Envío de alertas por puerto COM
+* Lectura continua de logs de Windows
+* Detección por Event ID
+* Control de eventos duplicados
+* Correlación temporal de eventos
+* Clasificación por severidad
+* Envío de alertas por puerto serie USB
 
 Ejemplo de mensaje enviado:
 
 ```
-SEVERITY=HIGH;MSG=Login fallido
+SEVERITY=CRITICAL;MSG=Fuerza bruta detectada
 ```
 
 ---
@@ -172,11 +196,12 @@ Mini-SOC-Arduino/
 
 ## 🚀 Posibles mejoras futuras
 
-* Correlación de eventos (X intentos en Y segundos)
-* Severidad CRITICAL automática
-* Envío de alertas por red
+* Correlación avanzada (IP, usuario, origen)
+* Detección de malware y procesos sospechosos
+* Envío de alertas por red (Syslog / HTTP)
 * Dashboard web complementario
-* Registro histórico de alertas
+* Almacenamiento histórico de alertas
+* Integración con SIEM real
 
 ---
 
@@ -185,6 +210,7 @@ Mini-SOC-Arduino/
 Este proyecto demuestra conocimientos en:
 
 * Análisis de eventos
+* Correlación de alertas
 * Monitorización defensiva
 * Arquitectura SOC
 * Integración hardware-software
@@ -197,3 +223,4 @@ Está orientado a **aprendizaje, portfolio y entrevistas técnicas**.
 
 Proyecto con fines **educativos y de aprendizaje**.
 No destinado a entornos productivos ni actividades no autorizadas.
+
