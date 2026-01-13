@@ -180,47 +180,15 @@ El proyecto se prueba mediante:
 Mini-SOC-Arduino/
 │
 ├── arduino/
-│   └── soc_panel.ino
+│   └── sketchjan13a.ino
 │
 ├── powershell/
-│   └── alerta_login.ps1
-│
-├── docs/
-│   ├── architecture.png
-│   └── panel_photo.jpg
+│   └── mini_soc_alertas.ps1
 │
 └── README.md
 ```
 
 ---
 
-## 🚀 Posibles mejoras futuras
 
-* Correlación avanzada (IP, usuario, origen)
-* Detección de malware y procesos sospechosos
-* Envío de alertas por red (Syslog / HTTP)
-* Dashboard web complementario
-* Almacenamiento histórico de alertas
-* Integración con SIEM real
-
----
-
-## 🎓 Enfoque profesional
-
-Este proyecto demuestra conocimientos en:
-
-* Análisis de eventos
-* Correlación de alertas
-* Monitorización defensiva
-* Arquitectura SOC
-* Integración hardware-software
-
-Está orientado a **aprendizaje, portfolio y entrevistas técnicas**.
-
----
-
-## ⚖️ Aviso legal
-
-Proyecto con fines **educativos y de aprendizaje**.
-No destinado a entornos productivos ni actividades no autorizadas.
 
